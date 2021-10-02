@@ -10,6 +10,12 @@ class Bottles(object):
         else:
             return str(number)
 
+    def successor(self, number: int) -> int:
+        if number == 0:
+            return 99
+        else:
+            return number - 1
+
     def container(self, number: int) -> str:
         if number == 1:
             return "bottle"
@@ -31,7 +37,8 @@ class Bottles(object):
             return f"{self.unit(number).capitalize()} {self.container(number)} of beer on the wall, " + \
                    f"{self.unit(number)} {self.container(number)} of beer.\n" + \
                    f"{self.action(number)}" + \
-                   f"{self.unit(number - 1)} {self.container(number - 1)} of beer on the wall.\n"
+                   f"{self.unit(self.successor(number))} {self.container(self.successor(number))} " + \
+                   "of beer on the wall.\n"
 
     def song(self) -> str:
         return self.verses(99, 0)
