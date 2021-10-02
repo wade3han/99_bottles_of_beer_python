@@ -1,12 +1,3 @@
-def unit(number: int) -> str:
-    if number == 0:
-        return "no more"
-    elif number == -1:
-        return "99"
-    else:
-        return str(number)
-
-
 def successor(number: int) -> int:
     if number == 0:
         return 99
@@ -14,34 +5,54 @@ def successor(number: int) -> int:
         return number - 1
 
 
-def container(number: int) -> str:
-    if number == 1:
-        return "bottle"
-    else:
-        return "bottles"
+class BottleNumber(object):
+    def __init__(self, number: int):
+        self.number = number
 
+    @property
+    def unit(self) -> str:
+        if self.number == 0:
+            return "no more"
+        elif self.number == -1:
+            return "99"
+        else:
+            return str(self.number)
 
-def action(number: int) -> str:
-    if number == 0:
-        return "Go to the store and buy some more, "
-    elif number == 1:
-        return "Take it down and pass it around, "
-    else:
-        return "Take one down and pass it around, "
+    @property
+    def successor(self) -> int:
+        if self.number == 0:
+            return 99
+        else:
+            return self.number - 1
+
+    @property
+    def container(self) -> str:
+        if self.number == 1:
+            return "bottle"
+        else:
+            return "bottles"
+
+    @property
+    def action(self) -> str:
+        if self.number == 0:
+            return "Go to the store and buy some more, "
+        elif self.number == 1:
+            return "Take it down and pass it around, "
+        else:
+            return "Take one down and pass it around, "
 
 
 class Bottles(object):
-    def __init__(self):
-        pass
-
     def verse(self, number: int) -> str:
+        bottle_number = BottleNumber(number)
+        successive_bottle_number = BottleNumber(successor(number))
         if number < 0 or number > 99:
             raise IndexError("The verse number N should be 0 <= N <= 99.")
         else:
-            return f"{unit(number).capitalize()} {container(number)} of beer on the wall, " + \
-                   f"{unit(number)} {container(number)} of beer.\n" + \
-                   f"{action(number)}" + \
-                   f"{unit(successor(number))} {container(successor(number))} of beer on the wall.\n"
+            return f"{bottle_number.unit.capitalize()} {bottle_number.container} of beer on the wall, " + \
+                   f"{bottle_number.unit} {bottle_number.container} of beer.\n" + \
+                   f"{bottle_number.action}" + \
+                   f"{successive_bottle_number.unit} {successive_bottle_number.container} of beer on the wall.\n"
 
     def song(self) -> str:
         return self.verses(99, 0)
