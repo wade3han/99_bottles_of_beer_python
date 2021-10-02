@@ -5,6 +5,8 @@ class Bottles(object):
     def unit(self, number: int) -> str:
         if number == 0:
             return "no more"
+        elif number == -1:
+            return "99"
         else:
             return str(number)
 
@@ -25,14 +27,9 @@ class Bottles(object):
     def verse(self, number: int) -> str:
         if number < 0 or number > 99:
             raise IndexError("The verse number N should be 0 <= N <= 99.")
-        elif number == 0:
-            return "No more bottles of beer on the wall, " + \
-                   "no more bottles of beer.\n" + \
-                   "Go to the store and buy some more, " + \
-                   "99 bottles of beer on the wall.\n"
         else:
-            return f"{number} {self.container(number)} of beer on the wall, " + \
-                   f"{number} {self.container(number)} of beer.\n" + \
+            return f"{self.unit(number).capitalize()} {self.container(number)} of beer on the wall, " + \
+                   f"{self.unit(number)} {self.container(number)} of beer.\n" + \
                    f"{self.action(number)}" + \
                    f"{self.unit(number - 1)} {self.container(number - 1)} of beer on the wall.\n"
 
