@@ -23,6 +23,10 @@ VERSE = {
        "4 bottles of beer.\n" +
        "Take one down and pass it around, " +
        "3 bottles of beer on the wall.\n",
+    6: "1 six-pack of beer on the wall, " +
+       "1 six-pack of beer.\n" +
+       "Take one down and pass it around, " +
+       "5 bottles of beer on the wall.\n",
     10: "10 bottles of beer on the wall, " +
         "10 bottles of beer.\n" +
         "Take one down and pass it around, " +
@@ -35,7 +39,7 @@ VERSE = {
 
 
 @pytest.mark.parametrize(
-    "number", [0, 1, 2, 3, 4, 10, 99],
+    "number", list(VERSE),
 )
 def test_verse(bottles: Bottles, number: int) -> None:
     assert bottles.verse(number) == VERSE[number]
